@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>New Casio</title>
+    <style>
+        body {
+            background-color: gainsboro;
+        }
+        
+        table {
+            background-color: rgb(8, 8, 8);
+            margin: 50px auto;
+            border: 5px outset rgb(70, 4, 4);
+        }
+        
+        td {
+            color: white;
+            border: 4px outset;
+            text-align: center;
+            padding: 10px 20px;
+        }
+        
+        input {
+            background-color: red;
+            color: black;
+        }
+        
+        td:active {
+            border: 4px inset rgb(248, 6, 6);
+            background-color: rgb(8, 8, 222);
+        }
+    </style>
+    <script>
+        function aop(n) {
+            document.getElementById('in1').value += n;
+        }
+
+        function cleared() {
+            document.querySelector('#in1').value = "";
+            document.querySelector('#in2').value = "";
+        }
+
+        function remove() {
+            var str = document.querySelector('#in1').value;
+            document.querySelector('#in1').value = str.slice(0, str.length - 1);
+        }
+
+        function fact() {
+            var i, num, f;
+            f = 1;
+            num = document.querySelector("#in1").value;
+            for (i = 1; i <= num; i++) {
+                f = f * i;
+            }
+            i = i - 1;
+            document.querySelector("#in2").value = f;
+        }
+
+
+        function operate() {
+            var op = document.querySelector("#in1").value;
+            var opfiltered = filtersymbols(op)
+            document.querySelector("#in2").value = eval(opfiltered);
+        }
+
+        function filtersymbols(i) {
+            i = i.replace("x", "*");
+            i = i.replace("^", "**");
+            i = i.replace("sin", "Math.sin");
+            i = i.replace("cos", "Math.cos");
+            i = i.replace("tan", "Math.cos");
+            i = i.replace("√", "Math.sqrt");
+            i = i.replace("ln", "Math.log");
+            return i;
+        }
+    </script>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td colspan="4"><input type="text" class="i1" id="in1" placeholder="operations" style="height:30px;width:100%"></td>
+            <td onclick="operate()">=</td>
+        </tr>
+        <tr>
+            <td colspan="4"><input type="text" class="i2" id="in2" placeholder="result" style="width:100%;" readonly>
+                <td onclick="remove()">⌫</td>
+        </tr>
+        <tr>
+
+            <td onclick="cleared()">C</td>
+            <td onclick="aop('1')">1</td>
+            <td onclick="aop('2')">2</td>
+            <td onclick="aop('3')">3</td>
+            <td onclick="aop('+')">+</td>
+        </tr>
+        <tr>
+            <td onclick="aop('^')">^</td>
+            <td onclick="aop('4')">4</td>
+            <td onclick="aop('5')">5</td>
+            <td onclick="aop('6')">6</td>
+            <td onclick="aop('-')">-</td>
+        </tr>
+        <tr>
+            <td onclick="fact()">!</td>
+            <td onclick="aop('7')">7</td>
+            <td onclick="aop('8')">8</td>
+            <td onclick="aop('9')">9</td>
+            <td onclick="aop('x')">x</td>
+        </tr>
+        <tr>
+            <td onclick="aop('ln(')">ln</td>
+            <td onclick="aop('√(')">√</td>
+            <td onclick="aop('0')">0</td>
+            <td onclick="aop('/')">/</td>
+            <td onclick="aop('.')">.</td>
+        </tr>
+        <tr>
+            <td onclick="aop('(')">(</td>
+            <td onclick="aop(')')">)</td>
+            <td onclick="aop('sin')">sin</td>
+            <td onclick="aop('cos')">cos</td>
+            <td onclick="aop('tan')">tan</td>
+        </tr>
+    </table>
+</body>
+
+</html>
